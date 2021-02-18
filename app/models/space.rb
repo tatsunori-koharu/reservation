@@ -1,3 +1,3 @@
 class Space < ApplicationRecord
-  has_one: oeder
+  has_one :order
 end
