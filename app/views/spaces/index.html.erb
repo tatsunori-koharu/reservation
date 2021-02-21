@@ -14,6 +14,7 @@
     <% @spaces.each do |space| %>
       <tr>
         <td><%= space.space %></td>
+        <td><%= link_to "○", new_space_order_path(space.id) %></td>
         <td><%= link_to 'Show', space %></td>
         <td><%= link_to 'Edit', edit_space_path(space) %></td>
         <td><%= link_to 'Destroy', space, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -23,5 +24,6 @@
 </table>
 
 <br>
-
+<%= link_to 'New User', new_user_registration_path %>
+<%= link_to 'Log_in', new_user_session_path %>
 <%= link_to 'New Space', new_space_path %>
