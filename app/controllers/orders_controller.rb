@@ -1,13 +1,13 @@
 class OrdersController < ApplicationController
 
   def new
-    @space = Space.find(params[:id])
     order = Order.new
+    # binding.pry
   end
 
   def create
-    @space = Space.find(params[:id])
-    order = Order.create(space_id: space.id, user_id: current_user.id)
+    @space = Space.find(params[:space_id])
+    order = Order.create!(space_id: params[:space_id], user_id: current_user.id)
     if order.save
         redirect_to root_path
     else
