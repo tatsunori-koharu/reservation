@@ -4,6 +4,7 @@ class SpacesController < ApplicationController
   # GET /spaces or /spaces.json
   def index
     @spaces = Space.all
+    @orders = Order.all 
   end
 
   # GET /spaces/1 or /spaces/1.json

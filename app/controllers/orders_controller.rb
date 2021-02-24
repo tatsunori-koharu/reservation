@@ -8,10 +8,12 @@ class OrdersController < ApplicationController
   def create
     @space = Space.find(params[:space_id])
     order = Order.create!(space_id: params[:space_id], user_id: current_user.id)
-    if order.save
-        redirect_to root_path
-    else
-      render action: :new
+    respond_to do |format|
+      if order.save
+        format.json {}
+      else
+        format.json { render json: order.error, status: :unprocessable_entity }
+      end
     end
   end
 
