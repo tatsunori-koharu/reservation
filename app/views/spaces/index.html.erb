@@ -11,23 +11,11 @@
   </thead>
 
   <tbody id="res">
-    <% @spaces.each do |space| %>
-      <tr>
-        <td><%= space.space %></td>
-        <% unless space.order.present? %>
-          <td><%= link_to "○", space_orders_path(space.id), method: :post, remote: true %></td>
-        <% else %>
-          <td>X</td>
-        <% end %>
-        <td><%= link_to 'Show', space %></td>
-        <td><%= link_to 'Edit', edit_space_path(space) %></td>
-        <td><%= link_to 'Destroy', space, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
+    <%= render partial: 'res' %>
     <script>
       $(document).ready(function() {
         $('#res').on('click', () => {
-          console.log("OK");
+          window.location.reload();
         });
       })
     </script>

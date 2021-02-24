@@ -1,0 +1,10 @@
+<% @spaces.each do |space| %>
+  <tr>
+    <td><%= space.space %></td>
+    <% unless space.order.present? %>
+      <td><%= link_to "○", space_orders_path(space.id), method: :post, remote: true %></td>
+    <% else %>
+      <td>x</td>
+    <% end %>
+  </tr>
+<% end %>
