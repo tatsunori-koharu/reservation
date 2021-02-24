@@ -17,7 +17,7 @@
         <% unless space.order.present? %>
           <td><%= link_to "○", space_orders_path(space.id), method: :post, remote: true %></td>
         <% else %>
-          <td><%= @orders.user.name %></td>
+          <td>X</td>
         <% end %>
         <td><%= link_to 'Show', space %></td>
         <td><%= link_to 'Edit', edit_space_path(space) %></td>
@@ -25,9 +25,9 @@
       </tr>
     <% end %>
     <script>
-      (function() {
+      $(document).ready(function() {
         $('#res').on('click', () => {
-          console.log("OK")
+          console.log("OK");
         });
       })
     </script>
