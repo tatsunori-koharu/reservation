@@ -6,7 +6,7 @@ class SpacesController < ApplicationController
     @spaces = Space.all
     @orders = Order.all 
     get_week
-    get_time
+    # get_time
   end
 
   # GET /spaces/1 or /spaces/1.json
@@ -95,17 +95,26 @@ class SpacesController < ApplicationController
   
         days = {month: (@todays_date + x).month, date: (@todays_date+x).day, wday: wdays[wday_num]}  # daysに月日曜日を代入
         @week_days.push(days) # daysを@week_daysに追加
+
+        @hours = []
+        start_time = 10
+        
+        9.times do
+          @hours << start_time
+          start_time = start_time + 1
+        end
+      
       end
 
-      def get_time
-        @hours = []
-        start_time = Time.now
-        end_time = start_time + 1.hour
-        9.times do
-          @hours << start_time << end_time
-          start_time = start_time + 1.hour
-        end
-      end
+      # def get_time
+      #   @hours = []
+      #   start_time = Time.at(3600)
+      
+      #   9.times do
+      #     @hours << start_time
+      #     start_time = start_time + 1.hour
+      #   end
+      # end
   
     end
 end

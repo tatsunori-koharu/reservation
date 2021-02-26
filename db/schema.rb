@@ -22,8 +22,9 @@ ActiveRecord::Schema.define(version: 2021_02_18_025612) do
   end
 
   create_table "spaces", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.datetime "start_time"
-    t.datetime "end_time"
+    t.integer "start_time"
+    t.integer "end_time"
+    t.date "day"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -21,15 +21,14 @@
   <tbody>
     <tr>
       <% @hours.each do |hour| %>
-        <td><%= hour.hour %>:00</td>
+        <td><%= hour %>:00</td>
       
       <% @week_days.length.times do %>
         <td>
           <%= form_with url: "/spaces", method: :post, local: true do |f| %>
-          <%= f.label :start_time %>
+          <label class="io">
           <input name="start_time" type="hidden" value=<%= hour %>>
-          <%= f.label :end_time %>
-          <input name="end_time" type="hidden" value=<%= hour %>>
+          <input name="end_time" type="hidden" value=<%= hour + 1.hour %>>
           <%= f.submit "○" %>
           </label>
           <% end %>
