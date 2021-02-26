@@ -28,7 +28,7 @@ class SpacesController < ApplicationController
 
     respond_to do |format|
       if @space.save
-        format.html { redirect_to @space, notice: "Space was successfully created." }
+        format.html { redirect_to root_path, notice: "Space was successfully created." }
         format.json { render :show, status: :created, location: @space }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -67,7 +67,7 @@ class SpacesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def space_params
-      params.require(:space).permit(:space)
+      params.permit(:start_time, :end_time)
     end
 
     def get_week
@@ -98,7 +98,13 @@ class SpacesController < ApplicationController
       end
 
       def get_time
-        @time = Time.now
+        @hours = []
+        start_time = Time.now
+        end_time = start_time + 1.hour
+        9.times do
+          @hours << start_time << end_time
+          start_time = start_time + 1.hour
+        end
       end
   
     end

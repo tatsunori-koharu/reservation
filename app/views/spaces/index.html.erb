@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Spaces</h1>
-<table class=calendar>
+<table class="calendar" border="1" >
   <thead>
     <tr>
       <th>
@@ -20,11 +20,24 @@
   </thead>
   <tbody>
     <tr>
-      <td><p>10:00</p></td>
+      <% @hours.each do |hour| %>
+        <td><%= hour.hour %>:00</td>
+      
       <% @week_days.length.times do %>
-        <td><%= @time.hour %>:<%= @time.min %></td>
+        <td>
+          <%= form_with url: "/spaces", method: :post, local: true do |f| %>
+          <%= f.label :start_time %>
+          <input name="start_time" type="hidden" value=<%= hour %>>
+          <%= f.label :end_time %>
+          <input name="end_time" type="hidden" value=<%= hour %>>
+          <%= f.submit "○" %>
+          </label>
+          <% end %>
+        </td>
       <% end %>
-    </tr>
+      </tr>
+      <% end %>
+    
   </tbody>
 </table>
 
@@ -33,7 +46,13 @@
 <%= link_to 'Log_in', new_user_session_path %>
 <%= link_to 'New Space', new_space_path %>
 
-
+<script>
+$(document).ready(function() {
+  $('.io').on('click', (data) => {
+    console.log(data);
+  });
+})
+</script>
 
 
 <%# <table>
