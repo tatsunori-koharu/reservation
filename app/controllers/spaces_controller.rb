@@ -67,7 +67,7 @@ class SpacesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def space_params
-      params.permit(:start_time, :end_time)
+      params.permit(:start_time, :end_time, :day)
     end
 
     def get_week
@@ -75,10 +75,11 @@ class SpacesController < ApplicationController
   
       # Dateオブジェクトは、日付を保持しています。下記のように`.today.day`とすると、今日の日付を取得できます。
       @todays_date = Date.today
+
       # 例)　今日が2月1日の場合・・・ Date.today.day => 1日
   
       @week_days = []
-  
+      @week = []
       # plans = Plan.where(date: @todays_date..@todays_date + 6)
   
       7.times do |x|
@@ -92,7 +93,10 @@ class SpacesController < ApplicationController
         if wday_num > 6 
           wday_num = wday_num -7
         end
-  
+        
+        @week << @todays_date + x
+        
+
         days = {month: (@todays_date + x).month, date: (@todays_date+x).day, wday: wdays[wday_num]}  # daysに月日曜日を代入
         @week_days.push(days) # daysを@week_daysに追加
 
@@ -103,7 +107,7 @@ class SpacesController < ApplicationController
           @hours << start_time
           start_time = start_time + 1
         end
-      
+
       end
 
       # def get_time

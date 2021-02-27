@@ -28,9 +28,31 @@
 }
 
 .item {
-  margin-left: 10px;
+  width: 75px;
+  margin: 10px 20px;
 }
 
 .hidden {
   display: none;
+}
+
+.week {
+  display: flex;
+}
+
+.item {
+  border: 1px solid;
+}
+
+.hours {
+  display: flex;
+}
+
+.days {
+  width: 75px;
+  margin: 20px;
+}
+
+.hour {
+  height: 50px;
 }

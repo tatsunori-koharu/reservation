@@ -1,46 +1,51 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Spaces</h1>
-<table class="calendar" border="1" >
-  <thead>
-    <tr>
-      <th>
+
+  <div class="calendar" >
+    <div class="week"> 
+      <%# <div>
         <p>
           時間\日
         </p>
-      </th>
+      </div> %>
       <% @week_days.each do |day| %>
-        <th class='item'>
+        <div class='item'>
           <div class='date'>
             <%= day[:month] %>/<%= day[:date] %> <%= day[:wday] %>
           </div>
-        </th>
+        </div>
       <% end %>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <% @hours.each do |hour| %>
-        <td><%= hour %>:00</td>
-      
-      <% @week_days.length.times do %>
-        <td>
-          <%= form_with url: "/spaces", method: :post, local: true do |f| %>
-          <label class="io">
-          <input name="start_time" type="hidden" value=<%= hour %>>
-          <input name="end_time" type="hidden" value=<%= hour + 1.hour %>>
-          <%= f.submit "○" %>
-          </label>
+    </div>
+    <% @spaces.each do |space| %>
+    <div class="hours" >
+      <% @week.each do |i|%>
+        <div class='days'>
+          <% @hours.each do |hour| %>
+            <div class='hour'>
+              <%= hour %>:00
+              <div>
+                <% if Time.now.hour >= hour && Time.now.year >= i.year && Time.now.mon >= i.mon && Time.now.day >= i.day || space.start_time == hour %>
+                  <p>X</p>
+                <% else %>
+                  <%= form_with url: "/spaces", method: :post, local: true do |f| %>
+                    <label class="io">
+                      <input name="start_time" type="hidden" value=<%= hour %>>
+                      <input name="end_time" type="hidden" value=<%= hour + 1 %>>
+                      <input name="day" type="hidden" value=<%= i %>>
+                      <%= f.submit "○" %>
+                    </label>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
           <% end %>
-        </td>
+        </div>
       <% end %>
-      </tr>
-      <% end %>
-    
-  </tbody>
-</table>
+    </div>
+    <% end %>
+  </div>
 
-<br>
 <%= link_to 'New User', new_user_registration_path %>
 <%= link_to 'Log_in', new_user_session_path %>
 <%= link_to 'New Space', new_space_path %>
@@ -61,7 +66,7 @@ $(document).ready(function() {
             </tr>
           </thead>
 
-          <tbody id="res">
+          <div id="res">
             <%= render partial: 'res' %>
             <%# <script>
               $(document).ready(function() {
@@ -70,5 +75,5 @@ $(document).ready(function() {
                 });
               })
             </script> %>
-          <%# </tbody> %>
+          <%# </div> %>
         <%# </table> %>
