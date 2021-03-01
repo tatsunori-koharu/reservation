@@ -2,49 +2,41 @@
 
 <h1>Spaces</h1>
 
-  <div class="calendar" >
-    <div class="week"> 
+  <table class="calendar" >
+    <thead class="week"> 
       <%# <div>
         <p>
           時間\日
         </p>
       </div> %>
       <% @week_days.each do |day| %>
-        <div class='item'>
-          <div class='date'>
+        <%# <div class='item'>
+          <div class='date'> %>
             <%= day[:month] %>/<%= day[:date] %> <%= day[:wday] %>
-          </div>
-        </div>
+          <%# </div>
+        </div> %>
       <% end %>
-    </div>
-    <% @spaces.each do |space| %>
-    <div class="hours" >
-      <% @week.each do |i|%>
-        <div class='days'>
-          <% @hours.each do |hour| %>
-            <div class='hour'>
-              <%= hour %>:00
-              <div>
-                <% if Time.now.hour >= hour && Time.now.year >= i.year && Time.now.mon >= i.mon && Time.now.day >= i.day || space.start_time == hour %>
-                  <p>X</p>
-                <% else %>
-                  <%= form_with url: "/spaces", method: :post, local: true do |f| %>
-                    <label class="io">
-                      <input name="start_time" type="hidden" value=<%= hour %>>
-                      <input name="end_time" type="hidden" value=<%= hour + 1 %>>
-                      <input name="day" type="hidden" value=<%= i %>>
-                      <%= f.submit "○" %>
-                    </label>
-                  <% end %>
-                <% end %>
-              </div>
-            </div>
+    </thead>
+    <%# <% @spaces.each do |space| %> 
+    <tbody class="hours" >
+      
+        <%# <div class='days'> %>
+          <% @spaces.each do |hour| %>
+            <tr class='hour '>
+              
+              <td>
+                
+                <%= hour.day %>
+                
+              </td>
+              
+            </tr>
           <% end %>
-        </div>
-      <% end %>
-    </div>
-    <% end %>
-  </div>
+        <%# </div> %>
+      
+    </tbody>
+    <%# <% end %> 
+  </table>
 
 <%= link_to 'New User', new_user_registration_path %>
 <%= link_to 'Log_in', new_user_session_path %>

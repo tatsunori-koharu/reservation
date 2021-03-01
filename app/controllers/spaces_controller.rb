@@ -83,11 +83,7 @@ class SpacesController < ApplicationController
       # plans = Plan.where(date: @todays_date..@todays_date + 6)
   
       7.times do |x|
-        # today_plans = []
-        # plan = plans.map do |plan|
-        #   today_plans.push(plan.plan) if plan.date == @todays_date + x
-        # end
-  
+        
         wday_num =  @todays_date.wday + x
   
         if wday_num > 6 
@@ -97,7 +93,7 @@ class SpacesController < ApplicationController
         @week << @todays_date + x
         
 
-        days = {month: (@todays_date + x).month, date: (@todays_date+x).day, wday: wdays[wday_num]}  # daysに月日曜日を代入
+        days = {month: (@todays_date + x).month, date: (@todays_date+x).day, wday: wdays[wday_num]}  # daysに月日,曜日を代入
         @week_days.push(days) # daysを@week_daysに追加
 
         @hours = []
@@ -109,16 +105,6 @@ class SpacesController < ApplicationController
         end
 
       end
-
-      # def get_time
-      #   @hours = []
-      #   start_time = Time.at(3600)
-      
-      #   9.times do
-      #     @hours << start_time
-      #     start_time = start_time + 1.hour
-      #   end
-      # end
   
     end
 end
